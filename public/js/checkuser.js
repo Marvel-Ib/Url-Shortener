@@ -20,9 +20,6 @@ async function isUserValid(target) {
 }
 
 document.getElementById("sh").addEventListener("input", async (e) => {
-  e.target.setCustomValidity("uset name active");
-  console.log("mehn");
-  e.target.reportValidity();
   //let isValid = await isUserValid(e.target)
   // optionally, we can re-use the return value if we need to.
   //e.target.reportValidity()

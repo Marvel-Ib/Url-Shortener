@@ -13,11 +13,11 @@ require("./models/connect");
 
 const port = 5000 || process.env.PORT;
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", { act: "contact" });
 });
 app.use(urlRoutes);
 
 app.use((req, res) => {
-  res.render("error");
+  res.render("error", { act: " " });
 });
 app.listen(port);

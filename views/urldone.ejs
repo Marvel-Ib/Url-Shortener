@@ -1,0 +1,26 @@
+<div class="ui center aligned text container">
+    <h1 class="ui huge header">Thank you for using URL SHORTNER</h1>
+  
+    <% if (mes) { %>
+        <div class="ui success message">
+                <div class="header">
+                  URL  SHORTENED
+                </div>
+                <p>You may now copy the link below to go your desired url</p>
+                <p>The link has also been sent to your email</p>
+              </div>
+        
+              <div class="field">
+              <input type="text" value=<%=mes%> id="myInput">
+            </div>
+              <!-- The button used to copy the text -->
+              <button class="ui button"  id="copystuff">Copy url</button>
+              <!-- The text field -->
+        
+            <% } %>
+  </div>
+
+  
+
+
+  

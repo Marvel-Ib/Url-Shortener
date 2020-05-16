@@ -17,36 +17,42 @@ const transporter = nodemailer.createTransport(
 router
   .route("/")
   .get((req, res) => {
-    res.render("home");
+    res.render("home", { act: "home" });
   })
   .post(async (req, res) => {
     const { email, long, short } = req.body;
     const newUrl = new urls({ email, long, short });
     const url = await newUrl.save();
-    console.log(url);
+    let sage = `${process.env.SITE_NAME}${url.short}`;
+    res.render("urldone", {
+      act: " ",
+      mes: sage,
+    });
 
-    return transporter
-      .sendMail({
-        to: email,
-        from: "awesomewonder553@gmail.com",
-        subject: "Signup succeeded bitch !",
-        html: "<h1>You successfully signed up!</h1>",
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (email) {
+      return transporter
+        .sendMail({
+          to: email,
+          from: "awesomewonder553@gmail.com",
+          subject: "Thank you for using Url Shortner !",
+          html: `<h1>The link to your shortened url:  ${sage} <h1>`,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   });
 
 router.get("/:url", async (req, res) => {
   try {
     const find = await urls.findOne({ short: req.params.url });
     if (!find) {
-      return res.render("error");
+      return res.render("error", { act: " " });
     }
     res.redirect(find.long);
   } catch (e) {
     console.log(e);
-    res.render("error");
+    res.render("error", { act: " " });
   }
 });
 

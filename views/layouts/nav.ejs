@@ -3,8 +3,17 @@
       <div class="ui borderless fluid huge inverted menu">
         <div class="ui container">
           <a class="header item" href="/">Url Shortener</a>
-          <a class="active item" href="/" >Home</a>
+          <% if (act== "home") {%>
+          <a class=" active item" href="/" >Home</a>
           <a class="item" href="/contact">Contact</a>
+        
+          <%} else if(act== "contact") {%>
+            <a class="item" href="/" >Home</a>
+            <a class="active item" href="/contact">Contact</a>
+            <% } else { %>
+              <a class="item" href="/" >Home</a>
+              <a class="item" href="/contact">Contact</a>
+            <% } %>
         </div>
       </div>
     </div>
@@ -19,8 +28,18 @@
           </div>
         </div>
         <div class="ui vertical borderless fluid inverted menu">
-          <a class="active item" href="/">Home</a>
-          <a class="item" href="/contact">Contact</a>
+          <% if (act== "home") {%>
+            <a class=" active item" href="/" >Home</a>
+            <a class="item" href="/contact">Contact</a>
+          
+            <%} else if(act== "contact") {%>
+              <a class="item" href="/" >Home</a>
+              <a class="active item" href="/contact">Contact</a>
+              <% } else { %>
+                <a class="item" href="/" >Home</a>
+                <a class="item" href="/contact">Contact</a>
+              <% } %>
+               
         </div>
       </div>
     </div>
