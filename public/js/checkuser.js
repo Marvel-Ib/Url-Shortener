@@ -1,26 +1,17 @@
-async function getSimilarUser(username) {
-  let response = await fetch(
-    `https://happy-css.com/api/users?limit=1&name=${username}`
-  );
-  return response.json();
-}
+$("#usercheck").on("input", function () {
+  $.get("/check?username=" + $("#usercheck").val().toLowerCase(), function (
+    response
+  ) {
+    $("#usernameResponseHidden").text(response.message);
 
-async function isUserValid(target) {
-  let username = target.value;
-  let users = await getSimilarUser(username);
-  if (users.length) {
-    let existingUsername = users[0].name;
-    if (existingUsername == username) {
-      target.setCustomValidity(`The user "${username}" already exists`);
-      return false;
+    if ($("#usernameResponseHidden").html() === "user doesn't exist") {
+      $("#usernameResponse").text("   ");
     }
-  }
-  target.setCustomValidity("");
-  return true;
-}
 
-document.getElementById("sh").addEventListener("input", async (e) => {
-  //let isValid = await isUserValid(e.target)
-  // optionally, we can re-use the return value if we need to.
-  //e.target.reportValidity()
+    if ($("#usernameResponseHidden").html() === "user exists") {
+      $("#usernameResponse").text(
+        "That username is taken. Please pick another"
+      );
+    }
+  });
 });

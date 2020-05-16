@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const urls = require("../models/url");
+require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
@@ -8,11 +9,21 @@ const sendgridTransport = require("nodemailer-sendgrid-transport");
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key:
-        "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 ",
+      api_key: process.env.EMAIL_KEY,
     },
   })
 );
+
+router.get("/check", async (req, res) => {
+  const me = await urls.findOne({ short: req.query.username });
+  let message;
+  if (me) {
+    message = "user exists";
+  } else {
+    message = "user doesn't exist";
+  }
+  res.json({ message: message });
+});
 
 router
   .route("/")
@@ -20,8 +31,10 @@ router
     res.render("home", { act: "home" });
   })
   .post(async (req, res) => {
-    const { email, long, short } = req.body;
+    let { email, long, short } = req.body;
+    short = short.trim();
     const newUrl = new urls({ email, long, short });
+
     const url = await newUrl.save();
     let sage = `${process.env.SITE_NAME}${url.short}`;
     res.render("urldone", {
