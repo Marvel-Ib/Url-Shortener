@@ -1,4 +1,4 @@
-# Url-Shortner
+# Url-Shortener
 
 Node.js app made with Express and Semantic ui  
 
@@ -17,7 +17,7 @@ Node.js app made with Express and Semantic ui
 Node app deployed and ran on Glitch, 
 
 ## click the link below to see the live app 
-# [url-shortner](https://marvel-url-shortener.herokuapp.com/)
+# [url-shortener](https://marvel-url-shortener.herokuapp.com/)
 
 # Usage
 ## Installation
